@@ -1,3 +1,5 @@
+import sys
+import traceback
 import tkinter as tk
 from modules import (  # type: ignore
     case_details,
@@ -7,6 +9,8 @@ from modules import (  # type: ignore
     settings,
     logs,
 )
+
+from verdict.handlers.logging import log
 
 
 class Verdict:
@@ -65,7 +69,22 @@ class Verdict:
         self.pages[page_index].grid()
 
 
+def custom_exception_handler(exc_type, exc_value, exc_traceback):
+    if issubclass(exc_type, KeyboardInterrupt):
+        sys.__excepthook__(exc_type, exc_value, exc_traceback)
+        return
+
+    error_message = "".join(
+        traceback.format_exception(exc_type, exc_value, exc_traceback)
+    )
+    log.ERROR(f"Unhandled exception:\n{error_message}")
+
+
+sys.excepthook = custom_exception_handler
+
+
 if __name__ == "__main__":
+    log.INFO("Application started")
     root = tk.Tk()
     root.state("zoomed")
     app = Verdict(root)

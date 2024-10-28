@@ -1,7 +1,9 @@
-import tkinter as tk
-from tkinter import ttk
 from datetime import datetime
+from tkinter import ttk
+import tkinter as tk
 import webbrowser
+
+from verdict.handlers.logging import log
 
 
 def create_button(master):
@@ -125,4 +127,5 @@ def get_data(doc_type_var, year_var, input_box):
     )
 
     final_url = f"{base_url}{search_query}{doc_type_param}{year_param}"
+    log.INFO(f"Opening URL: {final_url}")
     webbrowser.open(final_url)
