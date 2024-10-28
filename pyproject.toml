@@ -1,13 +1,12 @@
 [tool.poetry]
 name = "verdict"
 version = "0.1.0"
-description = "lawful second brain."
-authors = ["Abhinav Singh"]
+description = ""
+authors = ["Abhinav Singh <abnvxsin@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.13"
-tk = "^0.1.0"
 
 
 [build-system]
